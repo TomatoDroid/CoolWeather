@@ -26,7 +26,7 @@ public class CoolWeatherDB {
     //构造方法私有化
     private CoolWeatherDB(Context context){
         CoolWeatherOpenHelp  dbHelp = new CoolWeatherOpenHelp(context,DB_NAME,null,VERSION);
-        dbHelp.getWritableDatabase();
+        db = dbHelp.getWritableDatabase();
     }
     //获取CoolWeatherDB的实例
     public synchronized static CoolWeatherDB getInstance(Context context){
@@ -41,7 +41,7 @@ public class CoolWeatherDB {
             ContentValues values = new ContentValues();
             values.put("province_name",province.getProvinceName());
             values.put("province_code",province.getProvinceCode());
-            db.insert("province",null,values);
+            db.insert("Province",null,values);
         }
     }
     //从数据库获取全国所有省份的信息
@@ -93,15 +93,15 @@ public class CoolWeatherDB {
         return list;
     }
     //将Country实例存储数据库
-    public void saveCountry(County county){
+    public void saveCounty(County county){
         ContentValues values = new ContentValues();
-        values.put("country_name",county.getCountyName());
-        values.put("contry_code",county.getCountyCode());
+        values.put("county_name",county.getCountyName());
+        values.put("county_code",county.getCountyCode());
         values.put("city_id",county.getCityId());
-        db.insert("Country",null,values);
+        db.insert("County",null,values);
     }
     //从数据库读取某城市下所有信息
-    public List<County> loadCountry(int cityId){
+    public List<County> loadCounty(int cityId){
         List<County> list = new ArrayList<County>();
         Cursor cursor = db.query("County",null,"city_id=?",new String[]{String.valueOf(cityId)}
                 ,null,null,null);
