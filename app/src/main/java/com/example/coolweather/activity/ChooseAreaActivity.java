@@ -155,7 +155,7 @@ public class ChooseAreaActivity extends Activity {
             for(County county:countyList){
                 dataList.add(county.getCountyName());
             }
-            adapter.notifyDataSetChanged();
+            adapter.notifyDataSetChanged();//当数据改变后使ListView重新绘制
             listView.setSelection(0);
             titleText.setText(selectedCity.getCityName());
             currentLevel = LEVEL_COUNTRY;
