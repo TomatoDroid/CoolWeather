@@ -1,5 +1,7 @@
 package com.example.coolweather.util;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,12 +27,13 @@ public class HttpUtil {
                     InputStream in = connection.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                     StringBuilder response = new StringBuilder();
-                    String line = "";
+                    String line;
                     while((line=reader.readLine())!=null){
                         response.append(line);
                     }
                     if(listener!=null){
                         //回调listener接口
+                        Log.i("HttpUtil","sendHttpRequest---------："+response);
                         listener.onFinish(response.toString());
                     }
                 } catch (Exception e) {
